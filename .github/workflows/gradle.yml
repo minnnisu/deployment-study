@@ -46,7 +46,3 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             whoami
-      - name: Execute remote commands
-        run: |
-          ssh -p ${{ secrets.PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} "sudo fuser -k 8080/tcp"
-          ssh -p ${{ secrets.PORT }} ${{ secrets.SSH_USER }}@${{ secrets.SERVER_IP }} "sudo nohup java -jar ~/cicd/*.jar &"
