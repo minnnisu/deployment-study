@@ -47,7 +47,7 @@ jobs:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SSH_USER }}
           port: ${{ secrets.PORT }}
-          key: ${{ secrets.SERVER_SSH_PRIVATE_KEY }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "*.jar"  # 스프링 부트 JAR 파일이 위치한 경로를 지정합니다.
           target: "~/cicd"  # 서버에 파일을 업로드할 경로를 지정합니다.
       - name: Execute remote commands
