@@ -54,5 +54,8 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.PORT }}
           script: |
-            echo ${{secrets.PASSWORD}} | sudo -S fuser -k 8080/tcp || true
-            sudo -S nohup /usr/lib/jvm/java-17-openjdk-amd64/bin/java -jar ~/cicd/*.jar > ~/cicd/nohup.log 2>&1 &
+            echo ${{secrets.PASSWORD}} > ~/askpass.sh
+            chmod +x ~/askpass.sh
+            export SUDO_ASKPASS=~/askpass.sh
+            sudo -A fuser -k 8080/tcp || true
+            sudo -A nohup /usr/lib/jvm/java-17-openjdk-amd64/bin/java -jar ~/cicd/*.jar > ~/cicd/nohup.log 2>&1 &
