@@ -1,0 +1,20 @@
+version: "3"
+services:
+  spring-boot-app:
+    image: ${DOCKER_REPO}/deployment-study-spring-boot-app:latest
+    container_name: deployment-study-spring-boot-app
+    ports:
+      - "8080:8080"
+    networks:
+      - backend
+
+  nginx:
+    image: ${DOCKER_REPO}/deployment-study-nginx:latest
+    container_name: deployment-study-nginx
+    ports:
+      - "80:80"
+    networks:
+      - backend
+
+networks:
+  backend:
