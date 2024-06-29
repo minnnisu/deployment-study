@@ -63,4 +63,5 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.PORT }}
           script: |
+            cd ~/deployment-study
             docker-compose up -d
