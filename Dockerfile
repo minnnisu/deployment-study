@@ -1,13 +1,13 @@
-# 1. Base Java 17 image
 FROM openjdk:17-jdk-slim
 
-# 2. Set working directory
 WORKDIR /app
 
-ARG JAR_FILE=deployment-study-0.0.1-SNAPSHOT.jar
+ARG JAR_FILE=./build/libs/deployment-study-0.0.1-SNAPSHOT.jar
+ARG PROFILES
+ARG ENV
 
-# 3. Copy JAR file into container
-COPY ../build/libs/${JAR_FILE} deployment-study.jar
+# JAR 파일 메인 디렉토리에 복사
+COPY ${JAR_FILE} deployment-study.jar
 
-# 5. Command to run the application
-ENTRYPOINT ["java", "-jar", "deployment-study.jar"]
+# 시스템 진입점 정의
+ENTRYPOINT ["java", "-Dspring.profiles.active=${PROFILES}", "-Dserver.env=${ENV}", "-jar", "deployment-study.jar"]
