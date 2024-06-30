@@ -3,12 +3,14 @@ package org.minnnisu.deploymentstudy.controller;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/api/server")
 public class HealthCheckController {
     @Value("${serverName}") // application.yml의 값들을 매핑시킴
     private String serverName;
@@ -16,7 +18,7 @@ public class HealthCheckController {
     private String env;
     private Integer visitedCount = 0;
 
-    @GetMapping("/getServerInfo")
+    @GetMapping("/info")
     public ResponseEntity<Map<String, String>> getServerInfo() {
         visitedCount++;
 
