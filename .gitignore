@@ -37,3 +37,9 @@ out/
 .vscode/
 
 .env
+
+## application.yaml ###
+**/src/main/resources/application.yaml
+**/src/main/resources/application-common.yaml
+**/src/main/resources/application-dev.yaml
+**/src/main/resources/application-prod.yaml
