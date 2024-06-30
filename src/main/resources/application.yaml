@@ -3,8 +3,6 @@ spring:
     group:
       default: default, common
       dev: dev-profile, common
-      prod1: prod1-profile, common
-      prod2: prod2-profile, common
-
+      prod: prod-profile, common
 server:
   env: blue

@@ -1,0 +1,7 @@
+spring:
+  config:
+    activate:
+      on-profile: prod-profile
+server:
+  port: 8080
+serverName: prod-server
