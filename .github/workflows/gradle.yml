@@ -58,7 +58,7 @@ jobs:
     steps:
       - name: Set Green and Blue
         run: |
-          CURRENT_UPSTREAM=$(curl -s "http://${{ secrets.NGINX_IP }}/env")
+          CURRENT_UPSTREAM=$(curl -s "http://${{ secrets.NGINX_IP }}/api/server/env")
           echo $CURRENT_UPSTREAM
           echo "CURRENT_UPSTREAM=$CURRENT_UPSTREAM" >> $GITHUB_ENV
           if [ $CURRENT_UPSTREAM = "blue" ]; then
