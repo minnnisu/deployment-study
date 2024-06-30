@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-public class ServerController {
+public class HealthCheckController {
     @Value("${serverName}") // application.yml의 값들을 매핑시킴
     private String serverName;
     @Value("${server.env}")
