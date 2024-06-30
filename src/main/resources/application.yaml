@@ -1,7 +1,6 @@
 spring:
   profiles:
     group:
-      default: default, common
       dev: dev-profile, common
       prod: prod-profile, common
 server:
