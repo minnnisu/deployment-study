@@ -40,15 +40,13 @@ jobs:
         run: |
           CURRENT_UPSTREAM=$(curl -s "http://${{ secrets.NGINX_IP }}/env")
           echo $CURRENT_UPSTREAM
-          echo "CURRENT_IP=$CURRENT_UPSTREAM" >> $GITHUB_ENV
+          echo "CURRENT_UPSTREAM=$CURRENT_UPSTREAM" >> $GITHUB_ENV
           if [ $CURRENT_UPSTREAM = "blue" ]; then
-            echo "CURRENT_IP=${{ secrets.BLUE_IP }}" >> $GITHUB_ENV
             echo "STOPPED_IP=${{ secrets.GREEN_IP }}" >> $GITHUB_ENV
             echo "CURRENT_PORT=${{ secrets.BLUE_PORT }}" >> $GITHUB_ENV
             echo "STOPPED_PORT=${{ secrets.GREEN_PORT }}" >> $GITHUB_ENV
             echo "STOPPED_UPSTREAM=green" >> $GITHUB_ENV
           elif [ $CURRENT_UPSTREAM = "green" ]; then
-            echo "CURRENT_IP=${{ secrets.GREEN_IP }}" >> $GITHUB_ENV
             echo "STOPPED_IP=${{ secrets.BLUE_IP }}" >> $GITHUB_ENV
             echo "CURRENT_PORT=${{ secrets.GREEN_PORT }}" >> $GITHUB_ENV
             echo "STOPPED_PORT=${{ secrets.BLUE_PORT }}" >> $GITHUB_ENV
