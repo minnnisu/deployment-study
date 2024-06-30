@@ -21,10 +21,30 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Build with Gradle
-        uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
+      - name: Add Profiles
+        run: |
+          cd src/main/resources
+          echo "${{ secrets.APPLICATION_YAML}}" > application.yaml
+          echo "${{ secrets.APPLICATION_COMMON_YAML}}" > application-common.yaml
+          echo "${{ secrets.APPLICATION_PROD_YAML}}" > application-prod.yaml
+
+      # gradle 캐싱
+      - name: Gradle Caching
+        uses: actions/cache@v3
         with:
-          arguments: build
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      #gradlew 실행 권한 추가
+      - name: Grant Execute Permission For Gradlew
+        run: chmod +x gradlew
+
+      - name: Build With Gradle
+        run: ./gradlew build -x test
 
       - name: Docker build & push to docker repo
         run: |
@@ -33,7 +53,7 @@ jobs:
           docker push ${{ secrets.DOCKER_REPO }}/deployment-study-spring-boot-app
 
   deploy:
-    needs: build # build job이 성공해야만 deploy가 진행된다.
+    needs: build # "build" job이 성공해야만 deploy가 진행된다.
     runs-on: ubuntu-latest
     steps:
       - name: Set Green and Blue
