@@ -27,6 +27,7 @@ jobs:
           echo "${{ secrets.APPLICATION_YAML}}" > application.yaml
           echo "${{ secrets.APPLICATION_COMMON_YAML}}" > application-common.yaml
           echo "${{ secrets.APPLICATION_PROD_YAML}}" > application-prod.yaml
+          echo "${{ secrets.APPLICATION_TEST_YAML}}" > application-test.yaml
           ls -al
       # gradle 캐싱
       - name: Gradle Caching
@@ -42,6 +43,9 @@ jobs:
       #gradlew 실행 권한 추가
       - name: Grant Execute Permission For Gradlew
         run: chmod +x gradlew
+
+      - name: Test With Gradle
+        run: ./gradlew test
 
       - name: Build With Gradle
         run: ./gradlew build -x test
